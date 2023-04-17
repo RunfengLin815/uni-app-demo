@@ -1,0 +1,3 @@
+# 忽略 uni_modules 目录
+/uni_modules
+/unpackage/dist
