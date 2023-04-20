@@ -8,19 +8,19 @@
 	}, {
 		"path": "pages/cate/cate",
 		"style": {
-			
+
 		}
 
 	}, {
 		"path": "pages/my/my",
 		"style": {
-			
+
 		}
 
 	}, {
 		"path": "pages/cart/cart",
 		"style": {
-			
+
 		}
 
 	}],
@@ -32,6 +32,7 @@
 
 	},
 	"tabBar": {
+		"selectedColor": "#C00000",
 		"list": [{
 				"pagePath": "pages/home/home",
 				"text": "首页",
