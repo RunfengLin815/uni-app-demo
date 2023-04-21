@@ -39,11 +39,7 @@
 				console.log(res)
 				// 返回失败
 				if (res.meta.status !== 200) {
-					return uni.showToast({
-						title: "数据请求失败",
-						duration: 1500, // 1.5秒后自动消失
-						icon: 'none'
-					})
+					return uni.$showMsg()
 				}
 				// 挂载数据到data中的列表
 				this.swiperList = res.message

@@ -38,6 +38,15 @@ $http.afterRequest = function() {
 	uni.hideLoading()
 }
 
+// 封装请求失败后弹框的全局方法
+uni.$showMsg = function (title = '数据加载失败！', duration = 1500) {
+  uni.showToast({
+    title,
+    duration,
+    icon: 'none',
+  })
+}
+
 import App from './App.vue'
 export function createApp() {
 	const app = createSSRApp(App)
