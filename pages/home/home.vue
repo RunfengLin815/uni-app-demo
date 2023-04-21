@@ -10,6 +10,12 @@
 				</navigator>
 			</swiper-item>
 		</swiper>
+		<!-- 分类导航区域 -->
+		<view class="nav-list">
+		   <view class="nav-item" v-for="(item, i) in navList" :key="i" @click="navClickHandler(item)">
+		     <image :src="item.image_src" class="nav-img"></image>
+		   </view>
+		</view>
 	</view>
 </template>
 
@@ -18,31 +24,54 @@
 		data() {
 			return {
 				// 轮播图数据列表
-				swiperList: []
+				swiperList: [],
+				// 分类导航数据列表
+				navList: [],
 			};
 		},
 		onLoad() {
 			// 调用获取轮播图的自定义方法
 			this.getSwiperList()
+			// 调用获取分类导航数据的自定义方法
+			this.getNavList()
 		},
 		methods: {
-			// 获取轮播图数据的方法
+			// 获取轮播图数据
 			async getSwiperList() {
-				// check
-				console.log(uni.$http)
-				console.log(this.swiperList)
+				// // check
+				// console.log(uni.$http)
+				// console.log(this.swiperList)
 				// 请求数据
 				const {
 					data: res
 				} = await uni.$http.get('/api/public/v1/home/swiperdata')
-				// 打印查看数据
-				console.log(res)
 				// 返回失败
 				if (res.meta.status !== 200) {
 					return uni.$showMsg()
 				}
 				// 挂载数据到data中的列表
 				this.swiperList = res.message
+				// 提示
+				uni.$showMsg("数据请求成功！")
+			},
+			// 获取分类导航数据
+			async getNavList() {
+				const {
+					data: res
+				} = await uni.$http.get('/api/public/v1/home/catitems')
+				if (res.meta.status !== 200) return uni.$showMsg()
+				console.log(res)
+				this.navList = res.message
+			},
+			// nav-item 项被点击时候的事件处理函数
+			navClickHandler(item) {
+			  // 判断点击的是哪个 nav 
+			  if (item.name === '分类') {
+			    uni.switchTab({
+			      url: '/pages/cate/cate'
+			    })
+			  }
+			  // console.log(item)
 			}
 		}
 	}
@@ -57,5 +86,15 @@
 			width: 100%;
 			height: 100%;
 		}
+	}
+	.nav-list {
+	  display: flex;
+	  justify-content: space-around;
+	  margin: 15px 0;
+	
+	  .nav-img {
+	    width: 128rpx;
+	    height: 140rpx;
+	  }
 	}
 </style>
